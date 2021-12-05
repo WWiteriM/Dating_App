@@ -39,6 +39,8 @@ namespace API.Controllers
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
         {
+            if (roles == null) return BadRequest("Role must be chosen");
+
             var selectedRoles = roles.Split(",").ToArray();
 
             var user = await _userManager.FindByNameAsync(username);
